@@ -1,4 +1,4 @@
-package io.polyglotted.esmodel.api;
+package io.polyglotted.esmodel.api.query;
 
 public enum ExpressionType {
     All, Ids, Eq, Gte, Gt, Lte, Lt, Prefix, Ne, In, Between, Text, Regex, Exists, Missing,

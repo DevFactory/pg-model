@@ -1,5 +1,7 @@
 package io.polyglotted.esmodel.api;
 
+import io.polyglotted.esmodel.api.query.Expression;
+import io.polyglotted.esmodel.api.query.Expressions;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 

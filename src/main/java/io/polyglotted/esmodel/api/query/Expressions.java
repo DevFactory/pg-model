@@ -1,4 +1,4 @@
-package io.polyglotted.esmodel.api;
+package io.polyglotted.esmodel.api.query;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
@@ -7,11 +7,11 @@ import java.util.List;
 
 import static io.polyglotted.esmodel.api.index.FieldMapping.EXPIRY_FIELD;
 import static io.polyglotted.esmodel.api.index.FieldMapping.STATUS_FIELD;
-import static io.polyglotted.esmodel.api.Expression.withArray;
-import static io.polyglotted.esmodel.api.Expression.withLabel;
-import static io.polyglotted.esmodel.api.Expression.withMap;
-import static io.polyglotted.esmodel.api.Expression.withOnlyChildren;
-import static io.polyglotted.esmodel.api.Expression.withValue;
+import static io.polyglotted.esmodel.api.query.Expression.withArray;
+import static io.polyglotted.esmodel.api.query.Expression.withLabel;
+import static io.polyglotted.esmodel.api.query.Expression.withMap;
+import static io.polyglotted.esmodel.api.query.Expression.withOnlyChildren;
+import static io.polyglotted.esmodel.api.query.Expression.withValue;
 import static java.util.Arrays.asList;
 import static java.util.Collections.singletonList;
 

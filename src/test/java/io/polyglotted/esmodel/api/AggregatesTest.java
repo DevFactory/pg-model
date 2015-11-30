@@ -1,12 +1,13 @@
 package io.polyglotted.esmodel.api;
 
 import io.polyglotted.esmodel.api.query.Aggregates;
+import io.polyglotted.esmodel.api.query.Expression;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import static com.google.common.collect.ImmutableMap.of;
-import static io.polyglotted.esmodel.api.Expression.withMap;
-import static io.polyglotted.esmodel.api.Expressions.equalsTo;
+import static io.polyglotted.esmodel.api.query.Expression.withMap;
+import static io.polyglotted.esmodel.api.query.Expressions.equalsTo;
 import static io.polyglotted.esmodel.api.ModelUtil.deserialize;
 import static io.polyglotted.esmodel.api.ModelUtil.serialize;
 import static io.polyglotted.esmodel.api.query.AggregationType.Term;

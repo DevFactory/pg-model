@@ -2,7 +2,7 @@ package io.polyglotted.esmodel.api.index;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
-import io.polyglotted.esmodel.api.Expression;
+import io.polyglotted.esmodel.api.query.Expression;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;

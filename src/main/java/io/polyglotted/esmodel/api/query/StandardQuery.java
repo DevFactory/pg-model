@@ -1,7 +1,6 @@
 package io.polyglotted.esmodel.api.query;
 
 import com.google.common.collect.ImmutableList;
-import io.polyglotted.esmodel.api.Expression;
 import lombok.*;
 import lombok.experimental.Accessors;
 

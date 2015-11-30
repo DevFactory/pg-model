@@ -1,4 +1,4 @@
-package io.polyglotted.esmodel.api;
+package io.polyglotted.esmodel.api.query;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
