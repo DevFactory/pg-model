@@ -1,11 +1,12 @@
 package io.polyglotted.esmodel.api.query;
 
+import com.google.common.collect.ImmutableList;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 
 import java.util.Objects;
 
-import static io.polyglotted.esmodel.api.ModelUtil.jsonEquals;
+import static io.polyglotted.esmodel.api.ModelUtil.serialize;
 
 @RequiredArgsConstructor
 @ToString(includeFieldNames = false, doNotUseGetters = true)
@@ -17,11 +18,16 @@ public final class ResponseHeader {
 
     @Override
     public boolean equals(Object o) {
-        return jsonEquals(this, o);
+        return this == o || (!(o == null || getClass() != o.getClass()) &&
+           equalizer().equals(((ResponseHeader) o).equalizer()));
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(tookInMillis, totalHits, returnedHits, scrollId);
+    }
+
+    private String equalizer() {
+        return serialize(ImmutableList.of(totalHits, returnedHits, scrollId == null ? "" : scrollId));
     }
 }
