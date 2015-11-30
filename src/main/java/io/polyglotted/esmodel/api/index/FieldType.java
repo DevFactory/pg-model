@@ -14,7 +14,7 @@ public enum FieldType {
     LONG,
     DATE {
         @Override
-        void extra(JsonObject object) {
+        public void extra(JsonObject object) {
             object.addProperty("format", "dateOptionalTime");
         }
     },
@@ -24,11 +24,11 @@ public enum FieldType {
     GEO_POINT,
     GEO_SHAPE {
         @Override
-        void extra(JsonObject object) {
+        public void extra(JsonObject object) {
             object.addProperty("tree", "quadtree");
         }
     },
     OBJECT;
 
-    void extra(JsonObject object) {}
+    public void extra(JsonObject object) {}
 }

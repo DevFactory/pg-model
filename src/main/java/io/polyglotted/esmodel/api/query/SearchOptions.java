@@ -8,7 +8,7 @@ public enum SearchOptions {
     STRICT_EXPAND_OPEN_CLOSED((byte) 14), STRICT_EXPAND_OPEN_FORBID_CLOSED((byte) 38),
     STRICT_SINGLE_INDEX_NO_EXPAND_FORBID_CLOSED((byte) 48);
 
-    private final byte[] bytes;
+    public final byte[] bytes;
 
     SearchOptions(byte value) {
         this.bytes = new byte[]{value};

@@ -25,7 +25,7 @@ public final class FieldMapping implements Comparable<FieldMapping> {
     public static final String ANCESTOR_FIELD = "&ancestor";
     public static final String STATUS_FIELD = "&status";
 
-    static final List<FieldMapping> PRIVATE_FIELDS = ImmutableList.of(
+    public static final List<FieldMapping> PRIVATE_FIELDS = ImmutableList.of(
        notAnalyzedStringField(ANCESTOR_FIELD).docValues(true).includeInAll(false).build(),
        simpleField(BYTES_FIELD, FieldType.BINARY).build(),
        simpleField(EXPIRY_FIELD, FieldType.DATE).includeInAll(false).build(),
