@@ -19,7 +19,7 @@ public final class Aggregation {
     public final String label;
     public final String type;
     public final Object value;
-    public final ImmutableMap<String, Object> params;
+    public final ImmutableMap<String, Object> parameters;
 
     @Override
     public boolean equals(Object o) {
@@ -28,7 +28,7 @@ public final class Aggregation {
 
     @Override
     public int hashCode() {
-        return Objects.hash(label, type, value, params);
+        return Objects.hash(label, type, value, parameters);
     }
 
     public boolean hasBuckets() {
@@ -42,7 +42,7 @@ public final class Aggregation {
     }
 
     public <T> T param(String name, Class<T> tClass) {
-        return tClass.cast(params.get(name));
+        return tClass.cast(parameters.get(name));
     }
 
     public long longValue(String name) {

@@ -15,7 +15,7 @@ import static io.polyglotted.esmodel.api.ModelUtil.jsonEquals;
 @ToString(includeFieldNames = false, doNotUseGetters = true)
 public final class Script {
     public final String script;
-    public final ImmutableMap<String, Object> params;
+    public final ImmutableMap<String, Object> parameters;
     public final String lang;
 
 
@@ -26,7 +26,7 @@ public final class Script {
 
     @Override
     public int hashCode() {
-        return Objects.hash(script, params, lang);
+        return Objects.hash(script, parameters, lang);
     }
 
     public static Builder scriptBuilder() {
