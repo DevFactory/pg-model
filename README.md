@@ -1,7 +1,7 @@
-# es-model
+# pg-model: Polyglotted Common Models
 
-Elastic search model abstractions
+Standard set of models for geo coding, access control and elastic search abstraction
 
 ### Continuous Integration
 
-[![Circle CI](https://circleci.com/gh/polyglotted/es-model.svg?style=shield)](https://circleci.com/gh/polyglotted/es-model)
+[![Circle CI](https://circleci.com/gh/polyglotted/pg-model.svg?style=shield)](https://circleci.com/gh/polyglotted/pg-model)
