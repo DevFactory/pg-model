@@ -19,6 +19,7 @@ import static io.polyglotted.pgmodel.search.query.QueryResponse.responseBuilder;
 import static io.polyglotted.pgmodel.search.query.StandardQuery.queryBuilder;
 import static java.util.Arrays.asList;
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertNotNull;
 
 public class SearchObjectsTest {
 
@@ -96,9 +97,11 @@ public class SearchObjectsTest {
     public void indexKeyEqHash() {
         IndexKey orig = keyWith("a", "b", "c");
         IndexKey copy = keyWith("a", "b", "c");
-        IndexKey other1 = orig.newVersion(123L);
+        IndexKey other1 = keyWith("a", "b", "d");
         verifyEqualsHashCode(orig, copy, other1);
         verifyComparable(orig, other1);
+        assertNotNull(orig.newVersion(123L));
+        assertNotNull(orig.delete());
     }
 
     @Test
