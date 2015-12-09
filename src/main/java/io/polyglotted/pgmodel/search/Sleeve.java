@@ -28,6 +28,10 @@ public final class Sleeve<T> {
         return new Sleeve<>(checkNotNull(key), source, null, null, null, null, null);
     }
 
+    public static <T> Sleeve<T> delete(IndexKey key) {
+        return new Sleeve<>(checkNotNull(key).delete(), null, key.uniqueId(), null, null, null, null);
+    }
+
     public static <T> List<Sleeve<T>> createSleeves(List<T> objects, Function<T, Sleeve<T>> newSleeveFunction) {
         return transform(objects, newSleeveFunction);
     }
