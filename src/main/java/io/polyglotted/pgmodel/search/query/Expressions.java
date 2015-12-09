@@ -18,11 +18,11 @@ import static java.util.Collections.singletonList;
 public abstract class Expressions {
 
     public static Expression liveIndex() {
-        return and(missing(STATUS_FIELD.name()), missing(EXPIRY_FIELD.name()));
+        return and(missing(STATUS_FIELD), missing(EXPIRY_FIELD));
     }
 
     public static Expression archiveIndex() {
-        return and(exists(STATUS_FIELD.name()), exists(EXPIRY_FIELD.name()));
+        return and(exists(STATUS_FIELD), exists(EXPIRY_FIELD));
     }
 
     public static Expression all() {
