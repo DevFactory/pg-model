@@ -3,6 +3,7 @@ package io.polyglotted.pgmodel.search;
 import com.google.common.base.Function;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
+import lombok.experimental.Delegate;
 
 import java.util.List;
 import java.util.Objects;
@@ -14,6 +15,7 @@ import static io.polyglotted.pgmodel.util.ModelUtil.equalsAll;
 @RequiredArgsConstructor
 @ToString(includeFieldNames = false, doNotUseGetters = true)
 public final class Sleeve<T> {
+    @Delegate(excludes = KeyExclude.class)
     public final IndexKey key;
     public final T source;
     public final String ancestor;
@@ -36,14 +38,6 @@ public final class Sleeve<T> {
 
     public IndexKey key() {
         return key;
-    }
-
-    public String id() {
-        return key.id();
-    }
-
-    public String index() {
-        return key.index();
     }
 
     public T source() {

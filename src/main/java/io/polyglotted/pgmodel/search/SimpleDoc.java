@@ -3,6 +3,7 @@ package io.polyglotted.pgmodel.search;
 import com.google.common.collect.ImmutableMap;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
+import lombok.experimental.Delegate;
 
 import java.util.Objects;
 
@@ -12,6 +13,7 @@ import static io.polyglotted.pgmodel.util.ModelUtil.jsonEquals;
 @RequiredArgsConstructor
 @ToString(includeFieldNames = false, doNotUseGetters = true)
 public final class SimpleDoc {
+    @Delegate(excludes = KeyExclude.class)
     public final IndexKey key;
     public final ImmutableMap<String, Object> source;
 
@@ -27,10 +29,6 @@ public final class SimpleDoc {
 
     public IndexKey key() {
         return key;
-    }
-
-    public long version() {
-        return key.version;
     }
 
     public boolean boolVal(String property) {
