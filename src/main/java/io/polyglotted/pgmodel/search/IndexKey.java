@@ -72,13 +72,12 @@ public final class IndexKey implements Comparable<IndexKey> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         IndexKey that = (IndexKey) o;
-        return equalsAll(index, that.index, type, that.type, id, that.id,
-           parent, that.parent, version, that.version, delete, that.delete);
+        return equalsAll(index, that.index, type, that.type, id, that.id, version, that.version);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(index, type, id, parent, version, delete);
+        return Objects.hash(index, type, id, parent, version);
     }
 
     @Override

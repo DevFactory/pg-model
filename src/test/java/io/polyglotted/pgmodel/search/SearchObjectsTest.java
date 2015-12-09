@@ -8,7 +8,6 @@ import org.testng.annotations.Test;
 import static io.polyglotted.pgmodel.EqualityChecker.verifyComparable;
 import static io.polyglotted.pgmodel.EqualityChecker.verifyEqualsHashCode;
 import static io.polyglotted.pgmodel.search.IndexKey.keyWith;
-import static io.polyglotted.pgmodel.search.IndexKey.keyWithParent;
 import static io.polyglotted.pgmodel.search.index.Alias.aliasBuilder;
 import static io.polyglotted.pgmodel.search.index.FieldMapping.notAnalyzedStringField;
 import static io.polyglotted.pgmodel.search.index.Script.scriptBuilder;
@@ -97,11 +96,9 @@ public class SearchObjectsTest {
     public void indexKeyEqHash() {
         IndexKey orig = keyWith("a", "b", "c");
         IndexKey copy = keyWith("a", "b", "c");
-        IndexKey other1 = keyWithParent("a", "b", "c", "d");
-        IndexKey other2 = orig.delete();
-        IndexKey other3 = orig.newVersion(123L);
-        verifyEqualsHashCode(orig, copy, other1, other2, other3);
-        verifyComparable(orig, other3);
+        IndexKey other1 = orig.newVersion(123L);
+        verifyEqualsHashCode(orig, copy, other1);
+        verifyComparable(orig, other1);
     }
 
     @Test
