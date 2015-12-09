@@ -10,6 +10,7 @@ import java.util.Objects;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.collect.Lists.transform;
+import static io.polyglotted.pgmodel.search.KeyUtil.longToCompare;
 import static io.polyglotted.pgmodel.util.ModelUtil.equalsAll;
 
 @RequiredArgsConstructor
@@ -49,7 +50,7 @@ public final class Sleeve<T> {
     }
 
     public boolean isNew() {
-        return key.version() <= 0;
+        return longToCompare(key.version) <= 0;
     }
 
     public boolean shouldDelete() {
