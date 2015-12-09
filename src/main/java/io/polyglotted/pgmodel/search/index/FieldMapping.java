@@ -66,11 +66,11 @@ public final class FieldMapping implements Comparable<FieldMapping> {
     }
 
     public static FieldMapping.Builder notAnalyzedStringField(String field) {
-        return simpleField(field, FieldType.STRING).indexed(Indexed.NOT_ANALYZED).docValues(true);
+        return notAnalyzedField(field, FieldType.STRING).docValues(true);
     }
 
     public static FieldMapping.Builder notAnalyzedField(String field, FieldType fieldType) {
-        return simpleField(field, fieldType).indexed(Indexed.NO);
+        return simpleField(field, fieldType).indexed(Indexed.NOT_ANALYZED);
     }
 
     public static FieldMapping.Builder simpleField(String field, FieldType fieldType) {

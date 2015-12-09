@@ -43,7 +43,6 @@ public class FieldTypeTest {
             fail("cannot validate success");
 
         } catch (IllegalArgumentException ex) {
-            System.out.println(ex.getMessage());
             assertTrue(ex.getMessage().contains(message));
         }
     }

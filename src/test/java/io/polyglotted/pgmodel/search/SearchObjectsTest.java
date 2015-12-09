@@ -19,7 +19,9 @@ import static io.polyglotted.pgmodel.search.query.QueryResponse.responseBuilder;
 import static io.polyglotted.pgmodel.search.query.StandardQuery.queryBuilder;
 import static java.util.Arrays.asList;
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotNull;
+import static org.testng.Assert.assertTrue;
 
 public class SearchObjectsTest {
 
@@ -82,6 +84,9 @@ public class SearchObjectsTest {
         Sleeve<String> other = orig.delete();
         Sleeve<String> other2 = orig.update("b");
         verifyEqualsHashCode(orig, copy, other, other2);
+        assertTrue(orig.shouldStore());
+        assertFalse(orig.shouldDelete());
+        assertTrue(other.shouldDelete());
     }
 
     @Test

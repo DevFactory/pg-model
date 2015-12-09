@@ -58,7 +58,7 @@ public final class Sleeve<T> {
     }
 
     public boolean shouldStore() {
-        return Boolean.TRUE.equals(key.store);
+        return !Boolean.FALSE.equals(key.store);
     }
 
     public Sleeve<T> delete() {
