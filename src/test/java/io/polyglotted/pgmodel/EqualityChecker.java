@@ -15,8 +15,8 @@ public interface EqualityChecker {
         assertEquals(obj.hashCode(), copy.hashCode());
         assertFalse(obj.equals(null));
         assertFalse(obj.equals(""));
-        for (int i = 0; i < others.length; ++i) {
-            assertNotEquals(obj, others[i]);
+        for (T other : others) {
+            assertNotEquals(obj, other);
         }
     }
 

@@ -77,8 +77,8 @@ public class SearchObjectsTest {
 
     @Test
     public void sleeveEqHash() {
-        Sleeve<String> orig = Sleeve.create(keyWith("a", "a"), "a");
-        Sleeve<String> copy = Sleeve.create(keyWith("a", "a"), "a");
+        Sleeve<String> orig = Sleeve.create(keyWith("a", "b", "c"), "a");
+        Sleeve<String> copy = Sleeve.create(keyWith("a", "b", "c"), "a");
         Sleeve<String> other = orig.delete();
         Sleeve<String> other2 = orig.update("b");
         verifyEqualsHashCode(orig, copy, other, other2);
