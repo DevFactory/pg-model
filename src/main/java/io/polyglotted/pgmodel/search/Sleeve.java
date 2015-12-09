@@ -48,8 +48,12 @@ public final class Sleeve<T> {
         return key.version() <= 0;
     }
 
-    public boolean isDeleted() {
-        return key.delete;
+    public boolean shouldDelete() {
+        return Boolean.TRUE.equals(key.delete);
+    }
+
+    public boolean shouldStore() {
+        return Boolean.TRUE.equals(key.store);
     }
 
     public Sleeve<T> delete() {
