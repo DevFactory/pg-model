@@ -23,7 +23,7 @@ public abstract class HiddenFields {
            simpleField(EXPIRY_FIELD, FieldType.DATE).includeInAll(false).build(),
            notAnalyzedStringField(STATUS_FIELD).docValues(true).includeInAll(false).build(),
            simpleField(TIMESTAMP_FIELD, FieldType.DATE).includeInAll(false).build(),
-           notAnalyzedStringField(USER_FIELD).docValues(true).includeInAll(false).build(),
-           notAnalyzedStringField(UPDATER_FIELD).docValues(false).includeInAll(false).build());
+           notAnalyzedStringField(UPDATER_FIELD).docValues(null).includeInAll(false).build(),
+           notAnalyzedStringField(USER_FIELD).docValues(true).includeInAll(false).build());
     }
 }
