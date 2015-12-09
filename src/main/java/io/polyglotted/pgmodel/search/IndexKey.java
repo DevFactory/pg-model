@@ -16,18 +16,23 @@ import static io.polyglotted.pgmodel.search.KeyUtil.writeToStream;
 import static io.polyglotted.pgmodel.util.DigestUtil.generateUuid;
 import static io.polyglotted.pgmodel.util.ModelUtil.equalsAll;
 
-@Getter
 @Accessors(fluent = true)
 @RequiredArgsConstructor
 @ToString(includeFieldNames = false, doNotUseGetters = true)
 public final class IndexKey implements Comparable<IndexKey> {
+    @Getter
     public final String index;
+    @Getter
     public final String type;
+    @Getter
     public final String id;
+    @Getter
     public final String parent;
+    @Getter
     public final Long version;
     public final Boolean delete;
     public final Boolean store;
+    private transient String _uniqueId;
 
     public static IndexKey keyWith(String index, String type, String id) {
         return keyWithParent(index, type, id, null);
@@ -50,7 +55,8 @@ public final class IndexKey implements Comparable<IndexKey> {
     }
 
     public String uniqueId() {
-        return generateUuid(writeToStream(this, new ByteArrayOutputStream()).toByteArray()).toString();
+        return _uniqueId == null ? (_uniqueId = generateUuid(writeToStream(this, new ByteArrayOutputStream())
+           .toByteArray()).toString()) : _uniqueId;
     }
 
     public IndexKey delete() {
