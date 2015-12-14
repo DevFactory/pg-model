@@ -15,6 +15,8 @@ import static io.polyglotted.pgmodel.ac.Function.LESS_THAN;
 import static io.polyglotted.pgmodel.ac.Policy.policyBuilder;
 import static io.polyglotted.pgmodel.ac.Rule.ruleBuilder;
 import static io.polyglotted.pgmodel.ac.Subject.subjectBuilder;
+import static io.polyglotted.pgmodel.ac.SubjectAttribute.ACCESS_TOKEN;
+import static io.polyglotted.pgmodel.ac.SubjectAttribute.CREDENTIAL;
 import static java.time.Instant.ofEpochMilli;
 import static java.util.Arrays.asList;
 import static org.testng.Assert.assertEquals;
@@ -94,8 +96,8 @@ public class AcObjectsTest {
     public void subjectEqHash() {
         Subject orig = subject();
         Subject copy = subject();
-        Subject other1 = subjectBuilder().principal("tester2").attribute("name", "unit tester")
-           .attribute("CREDENTIAL", "zzcss").attribute("TOKEN", "bbntre").build();
+        Subject other1 = subjectBuilder().principal("tester2").attribute("DISPLAY_NAME", "unit tester")
+           .attribute(CREDENTIAL, "zzcss").attribute(ACCESS_TOKEN, "bbntre").build();
         verifyEqualsHashCode(orig, copy, other1);
         assertEquals(other1.credential(), "zzcss");
         assertEquals(other1.token(), "bbntre");

@@ -14,10 +14,10 @@ import java.util.Objects;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Predicates.not;
 import static com.google.common.collect.Maps.filterKeys;
+import static io.polyglotted.pgmodel.ac.SubjectAttribute.ACCESS_TOKEN;
 import static io.polyglotted.pgmodel.ac.SubjectAttribute.CREDENTIAL;
-import static io.polyglotted.pgmodel.ac.SubjectAttribute.TOKEN;
-import static io.polyglotted.pgmodel.util.ModelUtil.jsonEquals;
 import static io.polyglotted.pgmodel.util.MapRetriever.deepRetrieve;
+import static io.polyglotted.pgmodel.util.ModelUtil.jsonEquals;
 
 @ToString(includeFieldNames = false)
 @RequiredArgsConstructor
@@ -38,7 +38,7 @@ public final class Subject {
     }
 
     public String token() {
-        return attribute(TOKEN);
+        return attribute(ACCESS_TOKEN);
     }
 
     @Override
@@ -61,6 +61,10 @@ public final class Subject {
     public static class Builder {
         private String principal;
         private final Map<String, Object> attributes = new LinkedHashMap<>();
+
+        public Builder attribute(SubjectAttribute attr, Object value) {
+            return attribute(attr.name(), value);
+        }
 
         public Builder attribute(String key, Object value) {
             this.attributes.put(key, value);

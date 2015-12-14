@@ -18,7 +18,7 @@ import static io.polyglotted.pgmodel.util.ModelUtil.equalsAll;
 
 @Accessors(fluent = true)
 @RequiredArgsConstructor
-@ToString(includeFieldNames = false, doNotUseGetters = true)
+@ToString(includeFieldNames = false, of = {"index", "type", "id", "parent"}, doNotUseGetters = true)
 public final class IndexKey implements Comparable<IndexKey> {
     @Getter
     public final String index;
