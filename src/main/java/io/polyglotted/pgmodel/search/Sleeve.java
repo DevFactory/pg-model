@@ -20,7 +20,7 @@ public final class Sleeve<T> {
     public final IndexKey key;
     public final T source;
     public final String ancestor;
-    public final String status;
+    public final DocStatus status;
     public final Long timestamp;
     public final Long expiry;
     public final String user;

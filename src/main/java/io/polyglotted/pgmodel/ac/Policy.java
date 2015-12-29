@@ -22,7 +22,7 @@ import static java.util.Arrays.asList;
 public final class Policy {
     public final String urn;
     public final ImmutableList<String> resources;
-    public final ImmutableList<String> operations;
+    public final ImmutableList<AccessRole> roles;
     public final ImmutableList<Rule> rules;
     public final Effect effect;
     public final boolean enabled;
@@ -34,7 +34,7 @@ public final class Policy {
 
     @Override
     public int hashCode() {
-        return Objects.hash(urn, resources, operations, rules, effect);
+        return Objects.hash(urn, resources, roles, rules, effect);
     }
 
     public static Builder policyBuilder() {
@@ -47,7 +47,7 @@ public final class Policy {
     public static class Builder {
         private String urn;
         private final List<String> resources = new ArrayList<>();
-        private final List<String> operations = new ArrayList<>();
+        private final List<AccessRole> roles = new ArrayList<>();
         private final List<Rule> rules = new ArrayList<>();
         private Effect defaultEffect = Effect.DENY;
         private boolean enabled = true;
@@ -57,8 +57,8 @@ public final class Policy {
             return this;
         }
 
-        public Builder operation(String... operations) {
-            this.operations.addAll(asList(operations));
+        public Builder roles(AccessRole... roles) {
+            this.roles.addAll(asList(roles));
             return this;
         }
 
@@ -73,7 +73,7 @@ public final class Policy {
         }
 
         public Policy build() {
-            return new Policy(checkNotNull(urn), copyOf(resources), copyOf(operations),
+            return new Policy(checkNotNull(urn), copyOf(resources), copyOf(roles),
                copyOf(rules), checkNotNull(defaultEffect), enabled);
         }
     }
