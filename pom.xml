@@ -8,7 +8,7 @@
     </parent>
 
     <artifactId>pg-model</artifactId>
-    <version>1.1.5</version>
+    <version>1.1.6-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>Polyglotted Common Models</name>
     <description>Standard set of models for geo coding, access control and elastic search abstraction</description>
@@ -17,7 +17,7 @@
         <url>https://github.com/polyglotted/pg-model</url>
         <connection>scm:git:ssh://github.com/polyglotted/pg-model.git</connection>
         <developerConnection>scm:git:git+ssh://git@github.com/polyglotted/pg-model.git</developerConnection>
-        <tag>pg-model-1.1.5</tag>
+        <tag>HEAD</tag>
     </scm>
 
     <repositories>
