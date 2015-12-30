@@ -5,6 +5,9 @@ import com.google.common.collect.ImmutableMap;
 
 import java.util.List;
 
+import static io.polyglotted.pgmodel.search.DocStatus.PENDING;
+import static io.polyglotted.pgmodel.search.DocStatus.PENDING_DELETE;
+import static io.polyglotted.pgmodel.search.DocStatus.REJECTED;
 import static io.polyglotted.pgmodel.search.index.HiddenFields.EXPIRY_FIELD;
 import static io.polyglotted.pgmodel.search.index.HiddenFields.STATUS_FIELD;
 import static io.polyglotted.pgmodel.search.index.HiddenFields.TIMESTAMP_FIELD;
@@ -28,6 +31,11 @@ public abstract class Expressions {
 
     public static Expression allIndex() {
         return and(exists(TIMESTAMP_FIELD));
+    }
+
+    public static Expression approvalStatus() {
+        return and(in(STATUS_FIELD, PENDING.toStatus(), PENDING_DELETE.toStatus(),
+           REJECTED.toStatus()), missing(EXPIRY_FIELD));
     }
 
     public static Expression all() {
