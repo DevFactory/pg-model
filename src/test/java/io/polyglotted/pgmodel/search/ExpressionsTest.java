@@ -36,6 +36,7 @@ public class ExpressionsTest extends Expressions {
            {and(equalsTo("hello", "world"))},
            {liveIndex()},
            {archiveIndex()},
+           {allIndex()},
            {or(equalsTo("hello", "world"))},
            {not(equalsTo("hello", "world"))},
            {nested("foo.bar", equalsTo("hello", "world"))},

@@ -7,6 +7,7 @@ import java.util.List;
 
 import static io.polyglotted.pgmodel.search.index.HiddenFields.EXPIRY_FIELD;
 import static io.polyglotted.pgmodel.search.index.HiddenFields.STATUS_FIELD;
+import static io.polyglotted.pgmodel.search.index.HiddenFields.TIMESTAMP_FIELD;
 import static io.polyglotted.pgmodel.search.query.Expression.withArray;
 import static io.polyglotted.pgmodel.search.query.Expression.withLabel;
 import static io.polyglotted.pgmodel.search.query.Expression.withMap;
@@ -18,11 +19,15 @@ import static java.util.Collections.singletonList;
 public abstract class Expressions {
 
     public static Expression liveIndex() {
-        return and(missing(STATUS_FIELD), missing(EXPIRY_FIELD));
+        return and(missing(STATUS_FIELD), missing(EXPIRY_FIELD), exists(TIMESTAMP_FIELD));
     }
 
     public static Expression archiveIndex() {
         return and(exists(STATUS_FIELD), exists(EXPIRY_FIELD));
+    }
+
+    public static Expression allIndex() {
+        return and(exists(TIMESTAMP_FIELD));
     }
 
     public static Expression all() {

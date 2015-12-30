@@ -16,10 +16,13 @@ public class HiddenFieldsTest extends HiddenFields {
            "{\"field\":\"&bytes\",\"type\":\"BINARY\",\"argsMap\":{},\"properties\":{}},{\"field\":\"&expiry\"," +
            "\"type\":\"DATE\",\"includeInAll\":false,\"argsMap\":{},\"properties\":{}},{\"field\":\"&status\"," +
            "\"type\":\"STRING\",\"indexed\":\"NOT_ANALYZED\",\"docValues\":true,\"includeInAll\":false," +
-           "\"argsMap\":{},\"properties\":{}},{\"field\":\"&timestamp\",\"type\":\"DATE\",\"includeInAll\":false," +
-           "\"argsMap\":{},\"properties\":{}},{\"field\":\"&updater\",\"type\":\"STRING\",\"indexed\":" +
+           "\"argsMap\":{},\"properties\":{}},{\"field\":\"&timestamp\",\"type\":\"DATE\",\"includeInAll\":" +
+           "false,\"argsMap\":{},\"properties\":{}},{\"field\":\"&updater\",\"type\":\"STRING\",\"indexed\":" +
            "\"NOT_ANALYZED\",\"includeInAll\":false,\"argsMap\":{},\"properties\":{}},{\"field\":\"&user\"," +
            "\"type\":\"STRING\",\"indexed\":\"NOT_ANALYZED\",\"docValues\":true,\"includeInAll\":false," +
-           "\"argsMap\":{},\"properties\":{}}]"));
+           "\"argsMap\":{},\"properties\":{}},{\"field\":\"&comment\",\"type\":\"STRING\",\"indexed\":" +
+           "\"NOT_ANALYZED\",\"includeInAll\":false,\"argsMap\":{},\"properties\":{}},{\"field\":" +
+           "\"&uniqueid\",\"type\":\"STRING\",\"indexed\":\"NOT_ANALYZED\",\"includeInAll\":" +
+           "false,\"argsMap\":{},\"properties\":{}}]"));
     }
 }
