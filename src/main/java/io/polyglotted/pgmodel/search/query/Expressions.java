@@ -33,7 +33,7 @@ public abstract class Expressions {
         return and(exists(TIMESTAMP_FIELD));
     }
 
-    public static Expression approvalStatus() {
+    public static Expression pendingApproval() {
         return and(in(STATUS_FIELD, PENDING.toStatus(), PENDING_DELETE.toStatus(),
            REJECTED.toStatus()), missing(EXPIRY_FIELD));
     }

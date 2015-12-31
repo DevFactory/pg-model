@@ -20,9 +20,7 @@ public class HiddenFieldsTest extends HiddenFields {
            "false,\"argsMap\":{},\"properties\":{}},{\"field\":\"&updater\",\"type\":\"STRING\",\"indexed\":" +
            "\"NOT_ANALYZED\",\"includeInAll\":false,\"argsMap\":{},\"properties\":{}},{\"field\":\"&user\"," +
            "\"type\":\"STRING\",\"indexed\":\"NOT_ANALYZED\",\"docValues\":true,\"includeInAll\":false," +
-           "\"argsMap\":{},\"properties\":{}},{\"field\":\"&comment\",\"type\":\"STRING\",\"indexed\":" +
-           "\"NOT_ANALYZED\",\"includeInAll\":false,\"argsMap\":{},\"properties\":{}},{\"field\":" +
-           "\"&uniqueid\",\"type\":\"STRING\",\"indexed\":\"NOT_ANALYZED\",\"includeInAll\":" +
-           "false,\"argsMap\":{},\"properties\":{}}]"));
+           "\"argsMap\":{},\"properties\":{}},{\"field\":\"&uniqueId\",\"type\":\"STRING\",\"indexed\":" +
+           "\"NOT_ANALYZED\",\"includeInAll\":false,\"argsMap\":{},\"properties\":{}}]"));
     }
 }
