@@ -6,6 +6,9 @@ import java.io.IOException;
 import java.io.OutputStream;
 
 import static io.polyglotted.pgmodel.search.IndexKey.keyFrom;
+import static io.polyglotted.pgmodel.util.ModelUtil.serialize;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
 
 public class KeyUtilTest extends KeyUtil {
 
@@ -16,5 +19,12 @@ public class KeyUtilTest extends KeyUtil {
                 throw new IOException();
             }
         });
+    }
+
+    @Test
+    public void approvalKeyReversesBaseKey() {
+        IndexKey expected = IndexKey.keyFrom("foo", "bar", "baz", 25L);
+        IndexKey actual = expected.approvalKey().baseKey(expected.version);
+        assertThat(serialize(actual), is(serialize(expected)));
     }
 }

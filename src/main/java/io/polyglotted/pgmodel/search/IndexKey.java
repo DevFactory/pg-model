@@ -65,6 +65,11 @@ public final class IndexKey implements Comparable<IndexKey> {
 
     public IndexKey approvalKey() { return new IndexKey(index, type + "$approval", id, parent, null, delete, store); }
 
+    public IndexKey baseKey(Long baseVersion) {
+        int $app = type.indexOf("$approval");
+        return new IndexKey(index, $app > 0 ? type.substring(0, $app) : type, id, parent, baseVersion, delete, store);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
