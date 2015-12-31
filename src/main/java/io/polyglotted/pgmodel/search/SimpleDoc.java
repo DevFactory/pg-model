@@ -5,9 +5,12 @@ import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 import lombok.experimental.Delegate;
 
+import java.util.Map;
 import java.util.Objects;
 
 import static com.google.common.base.Optional.fromNullable;
+import static com.google.common.collect.Maps.filterKeys;
+import static io.polyglotted.pgmodel.search.index.HiddenFields.BYTES_FIELD;
 import static io.polyglotted.pgmodel.util.ModelUtil.jsonEquals;
 
 @RequiredArgsConstructor
@@ -18,36 +21,26 @@ public final class SimpleDoc {
     public final ImmutableMap<String, Object> source;
 
     @Override
-    public boolean equals(Object o) {
-        return jsonEquals(this, o);
-    }
+    public boolean equals(Object o) { return jsonEquals(this, o); }
 
     @Override
-    public int hashCode() {
-        return Objects.hash(key, source);
-    }
+    public int hashCode() { return Objects.hash(key, source); }
 
-    public IndexKey key() {
-        return key;
-    }
+    public Map<String, Object> filteredCopy() { return filterKeys(source, SimpleDoc::validKey); }
 
-    public boolean boolVal(String property) {
-        return fromNullable((Boolean) source.get(property)).or(false);
-    }
+    public IndexKey key() { return key; }
 
-    public int intVal(String property) {
-        return fromNullable((Integer) source.get(property)).or(Integer.MIN_VALUE);
-    }
+    public boolean boolVal(String property) { return fromNullable((Boolean) source.get(property)).or(false); }
 
-    public long longVal(String property) {
-        return fromNullable((Long) source.get(property)).or(Long.MIN_VALUE);
-    }
+    public int intVal(String property) { return fromNullable((Integer) source.get(property)).or(Integer.MIN_VALUE); }
 
-    public long longStrVal(String property) {
-        return Long.parseLong(strVal(property));
-    }
+    public long longVal(String property) { return fromNullable(longObjVal(property)).or(Long.MIN_VALUE); }
 
-    public String strVal(String property) {
-        return (String) source.get(property);
-    }
+    public long longStrVal(String property) { return Long.parseLong(strVal(property)); }
+
+    public Long longObjVal(String property) { return (Long) source.get(property); }
+
+    public String strVal(String property) { return (String) source.get(property); }
+
+    private static boolean validKey(String key) { return BYTES_FIELD.equals(key) || !key.startsWith("&"); }
 }
