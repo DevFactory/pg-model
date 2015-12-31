@@ -30,6 +30,8 @@ public final class SimpleDoc {
 
     public IndexKey key() { return key; }
 
+    public boolean hasItem(String property) { return source.containsKey(property); }
+
     public boolean boolVal(String property) { return fromNullable((Boolean) source.get(property)).or(false); }
 
     public int intVal(String property) { return fromNullable((Integer) source.get(property)).or(Integer.MIN_VALUE); }
