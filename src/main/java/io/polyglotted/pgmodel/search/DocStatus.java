@@ -5,7 +5,7 @@ import com.google.common.collect.ImmutableMap;
 import java.util.Map;
 
 public enum DocStatus {
-    LIVE, EXPIRED, DELETED, PENDING, PENDING_DELETE, REJECTED;
+    LIVE, EXPIRED, DELETED, PENDING, PENDING_DELETE, REJECTED, DISCARDED;
 
     private static final Map<String, DocStatus> STATUS_MAP = buildStatusMap();
 

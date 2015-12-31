@@ -4,6 +4,7 @@ import org.testng.annotations.Test;
 
 import static com.google.common.collect.ImmutableList.of;
 import static io.polyglotted.pgmodel.search.DocStatus.DELETED;
+import static io.polyglotted.pgmodel.search.DocStatus.DISCARDED;
 import static io.polyglotted.pgmodel.search.DocStatus.EXPIRED;
 import static io.polyglotted.pgmodel.search.DocStatus.LIVE;
 import static io.polyglotted.pgmodel.search.DocStatus.PENDING;
@@ -17,7 +18,7 @@ public class DocStatusTest {
 
     @Test
     public void toFromStatus() throws Exception {
-        for(DocStatus status : of(LIVE, EXPIRED, DELETED, PENDING, PENDING_DELETE, REJECTED)) {
+        for(DocStatus status : of(LIVE, EXPIRED, DELETED, PENDING, PENDING_DELETE, REJECTED, DISCARDED)) {
             assertThat(fromStatus(status.name()), is(status));
             assertThat(fromStatus(status.toStatus()), is(status));
         }

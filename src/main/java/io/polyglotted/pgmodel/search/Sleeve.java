@@ -1,6 +1,7 @@
 package io.polyglotted.pgmodel.search;
 
 import com.google.common.base.Function;
+import com.google.common.collect.ImmutableMap;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 import lombok.experimental.Delegate;
@@ -20,17 +21,14 @@ public final class Sleeve<T> {
     public final IndexKey key;
     public final T source;
     public final String ancestor;
-    public final DocStatus status;
-    public final Long timestamp;
-    public final Long expiry;
-    public final String user;
+    public final ImmutableMap<String, Object> header;
 
     public static <T> Sleeve<T> create(IndexKey key, T source) {
-        return new Sleeve<>(checkNotNull(key), source, null, null, null, null, null);
+        return new Sleeve<>(checkNotNull(key), source, null, ImmutableMap.of());
     }
 
     public static <T> Sleeve<T> delete(IndexKey key) {
-        return new Sleeve<>(checkNotNull(key).delete(), null, key.uniqueId(), null, null, null, null);
+        return new Sleeve<>(checkNotNull(key).delete(), null, key.uniqueId(), ImmutableMap.of());
     }
 
     public static <T> List<Sleeve<T>> createSleeves(List<T> objects, Function<T, Sleeve<T>> newSleeveFunction) {
@@ -41,37 +39,21 @@ public final class Sleeve<T> {
         return create(keyFunction.apply(object), object);
     }
 
-    public IndexKey key() {
-        return key;
-    }
+    public IndexKey key() { return key; }
 
-    public T source() {
-        return source;
-    }
+    public T source() { return source; }
 
-    public boolean isNew() {
-        return longToCompare(key.version) <= 0;
-    }
+    public boolean isNew() { return longToCompare(key.version) <= 0; }
 
-    public boolean shouldDelete() {
-        return Boolean.TRUE.equals(key.delete);
-    }
+    public boolean shouldDelete() { return Boolean.TRUE.equals(key.delete); }
 
-    public boolean shouldStore() {
-        return !Boolean.FALSE.equals(key.store);
-    }
+    public boolean shouldStore() { return !Boolean.FALSE.equals(key.store); }
 
-    public Sleeve<T> delete() {
-        return new Sleeve<>(key.delete(), null, key.uniqueId(), null, null, null, null);
-    }
+    public Sleeve<T> delete() { return new Sleeve<>(key.delete(), null, key.uniqueId(), ImmutableMap.of()); }
 
-    public Sleeve<T> update(T update) {
-        return new Sleeve<>(key, update, key.uniqueId(), null, null, null, null);
-    }
+    public Sleeve<T> update(T update) { return new Sleeve<>(key, update, key.uniqueId(), ImmutableMap.of()); }
 
-    public Sleeve<T> update(Function<T, T> updateFunction) {
-        return update(updateFunction.apply(source));
-    }
+    public Sleeve<T> update(Function<T, T> updateFunction) { return update(updateFunction.apply(source)); }
 
     @Override
     public boolean equals(Object o) {
@@ -82,7 +64,5 @@ public final class Sleeve<T> {
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hash(key, source, ancestor);
-    }
+    public int hashCode() { return Objects.hash(key, source, ancestor); }
 }
