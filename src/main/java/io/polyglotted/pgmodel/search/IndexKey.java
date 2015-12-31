@@ -59,13 +59,11 @@ public final class IndexKey implements Comparable<IndexKey> {
            .toByteArray()).toString()) : _uniqueId;
     }
 
-    public IndexKey delete() {
-        return new IndexKey(index, type, id, parent, version, true, store);
-    }
+    public IndexKey delete() { return new IndexKey(index, type, id, parent, version, true, store); }
 
-    public IndexKey newVersion(long version) {
-        return new IndexKey(index, type, id, parent, version, delete, store);
-    }
+    public IndexKey newVersion(long version) { return new IndexKey(index, type, id, parent, version, delete, store); }
+
+    public IndexKey approvalKey() { return new IndexKey(index, type + "$approval", id, parent, null, delete, store); }
 
     @Override
     public boolean equals(Object o) {
