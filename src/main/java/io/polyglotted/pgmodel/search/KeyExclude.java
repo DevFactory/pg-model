@@ -9,6 +9,4 @@ public interface KeyExclude {
     Boolean store();
 
     IndexKey newVersion(long version);
-
-    IndexKey baseKey(Long baseVersion);
 }
