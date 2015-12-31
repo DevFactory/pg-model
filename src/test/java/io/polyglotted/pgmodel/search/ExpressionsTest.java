@@ -38,6 +38,7 @@ public class ExpressionsTest extends Expressions {
            {archiveIndex()},
            {allIndex()},
            {pendingApproval()},
+           {approvalRejected()},
            {or(equalsTo("hello", "world"))},
            {not(equalsTo("hello", "world"))},
            {nested("foo.bar", equalsTo("hello", "world"))},
