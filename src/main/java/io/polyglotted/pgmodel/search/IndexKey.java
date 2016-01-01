@@ -63,7 +63,7 @@ public final class IndexKey implements Comparable<IndexKey> {
 
     public IndexKey newVersion(long version) { return new IndexKey(index, type, id, parent, version, delete, store); }
 
-    public IndexKey approvalKey() { return new IndexKey(index, type + "$approval", id, parent, null, delete, store); }
+    public IndexKey approvalKey() { return new IndexKey(index, approvalType(type), id, parent, null, delete, store); }
 
     public IndexKey baseKey(Long baseVersion) {
         int $app = type.indexOf("$approval");
@@ -87,5 +87,9 @@ public final class IndexKey implements Comparable<IndexKey> {
     public int compareTo(IndexKey other) {
         return other == null ? -1 : start().compare(index, other.index).compare(type, other.type).compare(nullToEmpty
            (id), nullToEmpty(other.id)).compare(longToCompare(version), longToCompare(other.version)).result();
+    }
+
+    public static String approvalType(String type) {
+        return type + "$approval";
     }
 }
