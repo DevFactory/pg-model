@@ -27,4 +27,12 @@ public class KeyUtilTest extends KeyUtil {
         IndexKey actual = expected.approvalKey().baseKey(expected.version);
         assertThat(serialize(actual), is(serialize(expected)));
     }
+
+    @Test
+    public void approvalKeyAndActualReturnTypesCorrectly() {
+        String expectedType = "bar$approval";
+        IndexKey original = IndexKey.keyWith("foo", "bar", "baz");
+        assertThat(original.approvalType(), is(expectedType));
+        assertThat(original.approvalKey().approvalType(), is(expectedType));
+    }
 }

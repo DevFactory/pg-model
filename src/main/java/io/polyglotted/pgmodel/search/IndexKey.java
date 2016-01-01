@@ -54,7 +54,7 @@ public final class IndexKey implements Comparable<IndexKey> {
         return new IndexKey(checkNotEmpty(index), checkNotEmpty(type), id, parent, version, null, null);
     }
 
-    public String approvalType() { return approvalType(type); }
+    public String approvalType() { return type.indexOf("$approval") > 0 ? type : approvalType(type); }
 
     public String uniqueId() {
         return _uniqueId == null ? (_uniqueId = generateUuid(writeToStream(this, new ByteArrayOutputStream())
