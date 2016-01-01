@@ -78,7 +78,7 @@ public class AcObjectsTest {
               .attribute("b").function(LESS_THAN).value("d"))).build();
         Policy other4 = policyBuilder().urn("testco:policy:2015").resource("*")
            .roles(CONSUMER, CURATOR).rule(ruleBuilder().effect(DENY).condition(conditionBuilder()
-              .attribute("b").function(IN).value("d")).build()).build();
+              .attribute("b").function(CONTAINS).value("d")).build()).build();
         Policy other5 = policyBuilder().urn("testco:policy:2015").resource("*")
            .roles(CONSUMER, CURATOR).rule(ruleBuilder().effect(DENY).condition(conditionBuilder()
               .attribute("b").function(LESS_THAN).value("d"))).defaultEffect(ALLOW).build();
