@@ -10,7 +10,9 @@ import java.util.Objects;
 
 import static com.google.common.base.Optional.fromNullable;
 import static com.google.common.collect.Maps.filterKeys;
+import static io.polyglotted.pgmodel.search.index.HiddenFields.BASEVERSION_FIELD;
 import static io.polyglotted.pgmodel.search.index.HiddenFields.BYTES_FIELD;
+import static io.polyglotted.pgmodel.search.index.HiddenFields.STATUS_FIELD;
 import static io.polyglotted.pgmodel.util.ModelUtil.jsonEquals;
 
 @RequiredArgsConstructor
@@ -29,6 +31,10 @@ public final class SimpleDoc {
     public Map<String, Object> filteredCopy() { return filterKeys(source, SimpleDoc::validKey); }
 
     public IndexKey key() { return key; }
+
+    public DocStatus status() { return DocStatus.fromStatus(strVal(STATUS_FIELD)); }
+
+    public Long baseVersion() { return hasItem(BASEVERSION_FIELD) ? longStrVal(BASEVERSION_FIELD) : null; }
 
     public boolean hasItem(String property) { return source.containsKey(property); }
 
