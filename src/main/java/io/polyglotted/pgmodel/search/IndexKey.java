@@ -54,7 +54,9 @@ public final class IndexKey implements Comparable<IndexKey> {
         return new IndexKey(checkNotEmpty(index), checkNotEmpty(type), id, parent, version, null, null);
     }
 
-    public String approvalType() { return type.indexOf("$approval") > 0 ? type : approvalType(type); }
+    public String approvalType() { return isApprovalType(type) ? type : approvalType(type); }
+
+    public String baseType() { return isApprovalType(type) ? baseType(type) : type; }
 
     public String uniqueId() {
         return _uniqueId == null ? (_uniqueId = generateUuid(writeToStream(this, new ByteArrayOutputStream())
@@ -68,8 +70,7 @@ public final class IndexKey implements Comparable<IndexKey> {
     public IndexKey approvalKey() { return new IndexKey(index, approvalType(), id, parent, null, delete, store); }
 
     public IndexKey baseKey(Long baseVersion) {
-        int $app = type.indexOf("$approval");
-        return new IndexKey(index, $app > 0 ? type.substring(0, $app) : type, id, parent, baseVersion, delete, store);
+        return new IndexKey(index, baseType(), id, parent, baseVersion, delete, store);
     }
 
     @Override
@@ -91,7 +92,9 @@ public final class IndexKey implements Comparable<IndexKey> {
            (id), nullToEmpty(other.id)).compare(longToCompare(version), longToCompare(other.version)).result();
     }
 
-    public static String approvalType(String type) {
-        return type + "$approval";
-    }
+    public static boolean isApprovalType(String type) { return type.indexOf("$approval") > 0; }
+
+    public static String approvalType(String type) { return type + "$approval"; }
+
+    public static String baseType(String type) { return type.substring(0, type.indexOf("$approval")); }
 }

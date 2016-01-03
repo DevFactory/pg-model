@@ -30,9 +30,13 @@ public class KeyUtilTest extends KeyUtil {
 
     @Test
     public void approvalKeyAndActualReturnTypesCorrectly() {
-        String expectedType = "bar$approval";
-        IndexKey original = IndexKey.keyWith("foo", "bar", "baz");
-        assertThat(original.approvalType(), is(expectedType));
-        assertThat(original.approvalKey().approvalType(), is(expectedType));
+        String baseType = "bar";
+        String approvalType = "bar$approval";
+        IndexKey baseKey = IndexKey.keyWith("foo", "bar", "baz");
+        IndexKey approvalKey = baseKey.approvalKey();
+        assertThat(baseKey.approvalType(), is(approvalType));
+        assertThat(approvalKey.approvalType(), is(approvalType));
+        assertThat(baseKey.baseType(), is(baseType));
+        assertThat(approvalKey.baseType(), is(baseType));
     }
 }
