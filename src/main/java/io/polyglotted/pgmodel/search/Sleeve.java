@@ -2,6 +2,7 @@ package io.polyglotted.pgmodel.search;
 
 import com.google.common.base.Function;
 import com.google.common.collect.ImmutableMap;
+import io.polyglotted.pgmodel.search.index.HiddenFields;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 import lombok.experimental.Delegate;
@@ -48,6 +49,8 @@ public final class Sleeve<T> {
     public boolean shouldDelete() { return Boolean.TRUE.equals(key.delete); }
 
     public boolean shouldStore() { return !Boolean.FALSE.equals(key.store); }
+
+    public DocStatus status() { return (DocStatus) header.get(HiddenFields.STATUS_FIELD); }
 
     public Sleeve<T> delete() { return new Sleeve<>(key.delete(), null, key.uniqueId(), ImmutableMap.of()); }
 
