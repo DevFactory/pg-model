@@ -28,7 +28,9 @@ public final class SimpleDoc {
     @Override
     public int hashCode() { return Objects.hash(key, source); }
 
-    public Map<String, Object> filteredCopy() { return filterKeys(source, SimpleDoc::validKey); }
+    public Map<String, Object> filteredCopy(boolean includeBase) {
+        return filterKeys(source, includeBase ? SimpleDoc::baseVersionKey : SimpleDoc::validKey);
+    }
 
     public IndexKey key() { return key; }
 
@@ -51,4 +53,6 @@ public final class SimpleDoc {
     public String strVal(String property) { return (String) source.get(property); }
 
     private static boolean validKey(String key) { return BYTES_FIELD.equals(key) || !key.startsWith("&"); }
+
+    private static boolean baseVersionKey(String key) { return BASEVERSION_FIELD.equals(key) || validKey(key); }
 }
