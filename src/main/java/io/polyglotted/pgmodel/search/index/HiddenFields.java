@@ -11,6 +11,8 @@ import java.util.Map;
 import static com.google.common.base.Preconditions.checkArgument;
 import static io.polyglotted.pgmodel.search.index.FieldMapping.notAnalyzedStringField;
 import static io.polyglotted.pgmodel.search.index.FieldMapping.simpleField;
+import static io.polyglotted.pgmodel.search.index.FieldType.LONG;
+import static io.polyglotted.pgmodel.search.index.FieldType.STRING;
 
 public abstract class HiddenFields {
     public static final String ANCESTOR_FIELD = "&ancestor";
@@ -36,6 +38,13 @@ public abstract class HiddenFields {
            simpleField(TIMESTAMP_FIELD, FieldType.DATE).includeInAll(false).build(),
            notAnalyzedStringField(UPDATER_FIELD).docValues(null).includeInAll(false).build(),
            notAnalyzedStringField(USER_FIELD).docValues(true).includeInAll(false).build());
+    }
+
+    public static List<FieldMapping> hiddenFieldsForApproval() {
+        return ImmutableList.of(
+           simpleField(APPROVAL_ROLES_FIELD, STRING).indexed(Indexed.NO).includeInAll(false).build(),
+           simpleField(BASEVERSION_FIELD, LONG).docValues(null).includeInAll(false).build(),
+           simpleField(COMMENT_FIELD, STRING).indexed(Indexed.NO).includeInAll(false).build());
     }
 
     @VisibleForTesting

@@ -15,8 +15,8 @@ public class HiddenFieldsTest extends HiddenFields {
 
     @Test
     public void testHiddenFields() {
-        String serialize = serialize(hiddenFields());
-        assertThat(serialize, is(notNullValue()));
+        assertThat(serialize(hiddenFields()), is(notNullValue()));
+        assertThat(serialize(hiddenFieldsForApproval()), is(notNullValue()));
     }
 
     @Test
