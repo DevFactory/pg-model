@@ -9,10 +9,6 @@ public enum DocStatus {
 
     private static final Map<String, DocStatus> STATUS_MAP = buildStatusMap();
 
-    public String toStatus() {
-        return name().toLowerCase();
-    }
-
     public static DocStatus fromStatus(String status) {
         return STATUS_MAP.get(status);
     }

@@ -20,7 +20,7 @@ public class DocStatusTest {
     public void toFromStatus() throws Exception {
         for(DocStatus status : of(LIVE, EXPIRED, DELETED, PENDING, PENDING_DELETE, REJECTED, DISCARDED)) {
             assertThat(fromStatus(status.name()), is(status));
-            assertThat(fromStatus(status.toStatus()), is(status));
+            assertThat(fromStatus(status.name().toLowerCase()), is(status));
         }
     }
 }

@@ -34,11 +34,11 @@ public abstract class Expressions {
     }
 
     public static Expression pendingApproval() {
-        return and(in(STATUS_FIELD, PENDING.toStatus(), PENDING_DELETE.toStatus()), missing(EXPIRY_FIELD));
+        return and(in(STATUS_FIELD, PENDING.name(), PENDING_DELETE.name()), missing(EXPIRY_FIELD));
     }
 
     public static Expression approvalRejected() {
-        return and(equalsTo(STATUS_FIELD, REJECTED.toStatus()), missing(EXPIRY_FIELD));
+        return and(equalsTo(STATUS_FIELD, REJECTED.name()), missing(EXPIRY_FIELD));
     }
 
     public static Expression all() {
