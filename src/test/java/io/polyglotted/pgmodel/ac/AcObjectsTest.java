@@ -13,7 +13,8 @@ import static io.polyglotted.pgmodel.ac.AccessRole.CURATOR;
 import static io.polyglotted.pgmodel.ac.Condition.conditionBuilder;
 import static io.polyglotted.pgmodel.ac.Effect.ALLOW;
 import static io.polyglotted.pgmodel.ac.Effect.DENY;
-import static io.polyglotted.pgmodel.ac.Function.*;
+import static io.polyglotted.pgmodel.ac.Function.BETWEEN;
+import static io.polyglotted.pgmodel.ac.Function.GREATER_THAN;
 import static io.polyglotted.pgmodel.ac.Function.LESS_THAN;
 import static io.polyglotted.pgmodel.ac.Policy.policyBuilder;
 import static io.polyglotted.pgmodel.ac.Rule.ruleBuilder;
@@ -21,9 +22,7 @@ import static io.polyglotted.pgmodel.ac.Subject.subjectBuilder;
 import static io.polyglotted.pgmodel.ac.SubjectAttribute.ACCESS_TOKEN;
 import static io.polyglotted.pgmodel.ac.SubjectAttribute.CREDENTIAL;
 import static java.time.Instant.ofEpochMilli;
-import static java.util.Arrays.asList;
 import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertNotNull;
 
 public class AcObjectsTest {
     private static final Clock TEST_CLOCK = Clock.fixed(ofEpochMilli(1442955118895L), ZoneOffset.UTC);
@@ -43,24 +42,6 @@ public class AcObjectsTest {
         Environment other1 = Environment.from(ImmutableMap.of("a", 2),
            Clock.fixed(ofEpochMilli(1442955118895L), ZoneOffset.UTC));
         verifyEqualsHashCode(orig, copy, other1);
-    }
-
-    @Test
-    public void accessContextEqHash() {
-        AccessContext orig = new AccessContext(subjectBuilder().principal("mgr").build(),
-           Environment.from(ImmutableMap.of("API_REF", 1, "RESOURCE", "b"), TEST_CLOCK));
-        AccessContext copy = new AccessContext(subjectBuilder().principal("mgr").build(),
-           Environment.from(ImmutableMap.of("API_REF", 1, "RESOURCE", "b"), TEST_CLOCK));
-        AccessContext other1 = new AccessContext(subjectBuilder().principal("sub").build(),
-           Environment.from(ImmutableMap.of("API_REF", 1, "RESOURCE", "b"), TEST_CLOCK));
-        AccessContext other2 = new AccessContext(subjectBuilder().principal("mgr").build(),
-           Environment.from(ImmutableMap.of("API_REF", 2, "RESOURCE", "d"), TEST_CLOCK));
-        verifyEqualsHashCode(orig, copy, other1, other2);
-
-        for (AccessContext context : asList(orig, copy, other1, other2)) {
-            assertNotNull(context.apiRef());
-            assertNotNull(context.resource());
-        }
     }
 
     @Test
