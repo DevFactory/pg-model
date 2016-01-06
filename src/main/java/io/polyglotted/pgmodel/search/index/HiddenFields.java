@@ -30,19 +30,19 @@ public abstract class HiddenFields {
 
     public static List<FieldMapping> hiddenFields() {
         return ImmutableList.of(
-           notAnalyzedStringField(ANCESTOR_FIELD).docValues(true).includeInAll(false).build(),
-           notAnalyzedStringField(BASEKEY_FIELD).docValues(null).includeInAll(false).build(),
+           notAnalyzedStringField(ANCESTOR_FIELD).includeInAll(false).build(),
+           notAnalyzedStringField(BASEKEY_FIELD).includeInAll(false).build(),
            simpleField(BYTES_FIELD, FieldType.BINARY).build(),
            simpleField(EXPIRY_FIELD, FieldType.DATE).includeInAll(false).build(),
-           notAnalyzedStringField(STATUS_FIELD).docValues(true).includeInAll(false).build(),
+           notAnalyzedStringField(STATUS_FIELD).includeInAll(false).build(),
            simpleField(TIMESTAMP_FIELD, FieldType.DATE).includeInAll(false).build(),
            notAnalyzedStringField(UPDATER_FIELD).docValues(null).includeInAll(false).build(),
-           notAnalyzedStringField(USER_FIELD).docValues(true).includeInAll(false).build());
+           notAnalyzedStringField(USER_FIELD).includeInAll(false).build());
     }
 
     public static List<FieldMapping> hiddenFieldsForApproval() {
         return ImmutableList.of(
-           simpleField(APPROVAL_ROLES_FIELD, STRING).indexed(Indexed.NO).includeInAll(false).build(),
+           notAnalyzedStringField(APPROVAL_ROLES_FIELD).includeInAll(false).build(),
            simpleField(BASEVERSION_FIELD, LONG).docValues(null).includeInAll(false).build(),
            simpleField(COMMENT_FIELD, STRING).indexed(Indexed.NO).includeInAll(false).build());
     }
