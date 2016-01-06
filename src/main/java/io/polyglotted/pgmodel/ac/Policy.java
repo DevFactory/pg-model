@@ -21,8 +21,8 @@ import static java.util.Arrays.asList;
 @RequiredArgsConstructor
 public final class Policy {
     public final String urn;
+    public final AccessRole role;
     public final ImmutableList<String> resources;
-    public final ImmutableList<AccessRole> roles;
     public final ImmutableList<Rule> rules;
     public final Effect effect;
     public final boolean enabled;
@@ -34,7 +34,7 @@ public final class Policy {
 
     @Override
     public int hashCode() {
-        return Objects.hash(urn, resources, roles, rules, effect);
+        return Objects.hash(urn, role, resources, rules, effect);
     }
 
     public static Builder policyBuilder() {
@@ -46,19 +46,14 @@ public final class Policy {
     @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
     public static class Builder {
         private String urn;
+        private AccessRole role;
         private final List<String> resources = new ArrayList<>();
-        private final List<AccessRole> roles = new ArrayList<>();
         private final List<Rule> rules = new ArrayList<>();
         private Effect defaultEffect = Effect.DENY;
         private boolean enabled = true;
 
         public Builder resource(String... resources) {
             this.resources.addAll(asList(resources));
-            return this;
-        }
-
-        public Builder roles(AccessRole... roles) {
-            this.roles.addAll(asList(roles));
             return this;
         }
 
@@ -73,7 +68,7 @@ public final class Policy {
         }
 
         public Policy build() {
-            return new Policy(checkNotNull(urn), copyOf(resources), copyOf(roles),
+            return new Policy(checkNotNull(urn), checkNotNull(role), copyOf(resources),
                copyOf(rules), checkNotNull(defaultEffect), enabled);
         }
     }

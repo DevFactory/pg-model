@@ -34,19 +34,19 @@ public class AcObjectsTest {
         Policy orig = policy();
         Policy copy = policy();
         Policy other1 = policyBuilder().urn("testco:policy:2017").resource("*")
-           .roles(CONSUMER, CURATOR).rule(ruleBuilder().effect(DENY).condition(conditionBuilder()
+           .role(CONSUMER).rule(ruleBuilder().effect(DENY).condition(conditionBuilder()
               .attribute("b").function(LESS_THAN).value("d"))).build();
         Policy other2 = policyBuilder().urn("testco:policy:2015").resource("abc/def")
-           .roles(CONSUMER, CURATOR).rule(ruleBuilder().effect(DENY).condition(conditionBuilder()
+           .role(CONSUMER).rule(ruleBuilder().effect(DENY).condition(conditionBuilder()
               .attribute("b").function(LESS_THAN).value("d"))).build();
         Policy other3 = policyBuilder().urn("testco:policy:2015").resource("*")
-           .roles(ADMINISTRATOR).rule(ruleBuilder().effect(DENY).condition(conditionBuilder()
+           .role(ADMINISTRATOR).rule(ruleBuilder().effect(DENY).condition(conditionBuilder()
               .attribute("b").function(LESS_THAN).value("d"))).build();
         Policy other4 = policyBuilder().urn("testco:policy:2015").resource("*")
-           .roles(CONSUMER, CURATOR).rule(ruleBuilder().effect(DENY).condition(conditionBuilder()
+           .role(CONSUMER).rule(ruleBuilder().effect(DENY).condition(conditionBuilder()
               .attribute("b").function(GREATER_THAN).value("d")).build()).build();
         Policy other5 = policyBuilder().urn("testco:policy:2015").resource("*")
-           .roles(CONSUMER, CURATOR).rule(ruleBuilder().effect(DENY).condition(conditionBuilder()
+           .role(CONSUMER).rule(ruleBuilder().effect(DENY).condition(conditionBuilder()
               .attribute("b").function(LESS_THAN).value("d"))).defaultEffect(ALLOW).build();
         verifyEqualsHashCode(orig, copy, other1, other2, other3, other4, other5);
     }
@@ -74,7 +74,7 @@ public class AcObjectsTest {
 
     public static Policy policy() {
         return policyBuilder().urn("testco:policy:2015").resource("*")
-           .roles(CONSUMER, CURATOR).rule(ruleBuilder().effect(DENY).condition(conditionBuilder()
+           .role(CURATOR).rule(ruleBuilder().effect(DENY).condition(conditionBuilder()
               .attribute("b").function(LESS_THAN).value("d"))).build();
     }
 
