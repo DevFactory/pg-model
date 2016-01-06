@@ -25,21 +25,13 @@ public final class Subject {
     public final String principal;
     public final ImmutableMap<String, Object> attributes;
 
-    public final <T> T attribute(String path) {
-        return deepRetrieve(attributes, path);
-    }
+    public final <T> T attribute(String path) { return deepRetrieve(attributes, path); }
 
-    public final <T> T attribute(SubjectAttribute attribute) {
-        return attribute(attribute.name());
-    }
+    public final <T> T attribute(SubjectAttribute attribute) { return attribute(attribute.name()); }
 
-    public String credential() {
-        return attribute(CREDENTIAL);
-    }
+    public String credential() { return attribute(CREDENTIAL); }
 
-    public String token() {
-        return attribute(ACCESS_TOKEN);
-    }
+    public String token() { return attribute(ACCESS_TOKEN); }
 
     @Override
     public boolean equals(Object o) {

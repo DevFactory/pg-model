@@ -1,7 +1,6 @@
 package io.polyglotted.pgmodel.util;
 
 import com.google.common.collect.ImmutableMap;
-import io.polyglotted.pgmodel.ac.Environment;
 import io.polyglotted.pgmodel.ac.Subject;
 import lombok.EqualsAndHashCode;
 import lombok.RequiredArgsConstructor;
@@ -9,12 +8,9 @@ import lombok.ToString;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import java.time.Clock;
-import java.time.ZoneOffset;
 import java.util.Map;
 
 import static io.polyglotted.pgmodel.ac.Subject.subjectBuilder;
-import static java.time.Instant.ofEpochMilli;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.nullValue;
@@ -46,12 +42,6 @@ public class MapRetrieverTest extends MapRetriever {
         assertThat(subject.attribute("varMap.notFound"), is(nullValue()));
         assertThat(subject.attribute("varMap.xv"), is(true));
         assertThat(subject.attribute("varMap.s2.name"), is("bill"));
-
-        Environment environment = Environment.from(ImmutableMap.of("API_REF", 25, "RESOURCE", "myResource",
-           "b", true, "c", stringDoubleMap()), Clock.fixed(ofEpochMilli(1442955118895L), ZoneOffset.UTC));
-        assertThat(environment.apiRef(), is(25));
-        assertThat(environment.resource(), is("myResource"));
-        assertThat(environment.property("c.y"), is(2.4));
     }
 
     @Test(expectedExceptions = IllegalArgumentException.class,

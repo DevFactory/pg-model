@@ -1,10 +1,6 @@
 package io.polyglotted.pgmodel.ac;
 
-import com.google.common.collect.ImmutableMap;
 import org.testng.annotations.Test;
-
-import java.time.Clock;
-import java.time.ZoneOffset;
 
 import static io.polyglotted.pgmodel.EqualityChecker.verifyEqualsHashCode;
 import static io.polyglotted.pgmodel.ac.AccessRole.ADMINISTRATOR;
@@ -21,26 +17,15 @@ import static io.polyglotted.pgmodel.ac.Rule.ruleBuilder;
 import static io.polyglotted.pgmodel.ac.Subject.subjectBuilder;
 import static io.polyglotted.pgmodel.ac.SubjectAttribute.ACCESS_TOKEN;
 import static io.polyglotted.pgmodel.ac.SubjectAttribute.CREDENTIAL;
-import static java.time.Instant.ofEpochMilli;
 import static org.testng.Assert.assertEquals;
 
 public class AcObjectsTest {
-    private static final Clock TEST_CLOCK = Clock.fixed(ofEpochMilli(1442955118895L), ZoneOffset.UTC);
 
     @Test
     public void conditionEqHash() {
         Condition orig = condition();
         Condition copy = condition();
         Condition other1 = conditionBuilder().attribute("b").function(BETWEEN).value("b").negate(true).build();
-        verifyEqualsHashCode(orig, copy, other1);
-    }
-
-    @Test
-    public void environmentEqHash() {
-        Environment orig = environment();
-        Environment copy = environment();
-        Environment other1 = Environment.from(ImmutableMap.of("a", 2),
-           Clock.fixed(ofEpochMilli(1442955118895L), ZoneOffset.UTC));
         verifyEqualsHashCode(orig, copy, other1);
     }
 
@@ -99,11 +84,6 @@ public class AcObjectsTest {
 
     public static Condition condition() {
         return conditionBuilder().attribute("a").function(BETWEEN).value("b").negate(true).build();
-    }
-
-    public static Environment environment() {
-        return Environment.from(ImmutableMap.of("a", "aa", "b", true, "c", 25),
-           Clock.fixed(ofEpochMilli(1442955118895L), ZoneOffset.UTC));
     }
 
     public static Subject subject() {
