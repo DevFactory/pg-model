@@ -33,6 +33,7 @@ public final class IndexKey implements Comparable<IndexKey> {
     public final Boolean delete;
     public final Boolean store;
     private transient String _uniqueId;
+    private transient String _typeUrn;
 
     public static IndexKey keyWith(String index, String type, String id) {
         return keyWithParent(index, type, id, null);
@@ -57,6 +58,8 @@ public final class IndexKey implements Comparable<IndexKey> {
     public String approvalType() { return isApprovalType(type) ? type : approvalType(type); }
 
     public String baseType() { return isApprovalType(type) ? baseType(type) : type; }
+
+    public String typeUrn() { return _typeUrn == null ? (_typeUrn = index + ":" + baseType()) : _typeUrn; }
 
     public String uniqueId() {
         return _uniqueId == null ? (_uniqueId = generateUuid(writeToStream(this, new ByteArrayOutputStream())
