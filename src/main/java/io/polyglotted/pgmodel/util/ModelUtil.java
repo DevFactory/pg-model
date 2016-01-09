@@ -37,6 +37,8 @@ public abstract class ModelUtil {
         return c == o || (!(o == null || c.getClass() != o.getClass()) && serialize(c).equals(serialize(o)));
     }
 
+    public static int safeIndex(int num) { return num < 0 ? 0 : num; }
+
     public static boolean doubleEquals(double a, double b) {
         return a == b || Math.abs(a - b) < 0.0000001;
     }

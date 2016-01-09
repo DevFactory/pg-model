@@ -15,6 +15,7 @@ import static io.polyglotted.pgmodel.search.KeyUtil.longToCompare;
 import static io.polyglotted.pgmodel.search.KeyUtil.writeToStream;
 import static io.polyglotted.pgmodel.util.DigestUtil.generateUuid;
 import static io.polyglotted.pgmodel.util.ModelUtil.equalsAll;
+import static io.polyglotted.pgmodel.util.ModelUtil.safeIndex;
 
 @Accessors(fluent = true)
 @RequiredArgsConstructor
@@ -57,9 +58,11 @@ public final class IndexKey implements Comparable<IndexKey> {
 
     public String approvalType() { return isApprovalType(type) ? type : approvalType(type); }
 
+    public String baseIndex() { return isDotIndex(index) ? baseIndex(index) : index; }
+
     public String baseType() { return isApprovalType(type) ? baseType(type) : type; }
 
-    public String typeUrn() { return _typeUrn == null ? (_typeUrn = index + ":" + baseType()) : _typeUrn; }
+    public String typeUrn() { return _typeUrn == null ? (_typeUrn = typeUrn(baseIndex(), baseType())) : _typeUrn; }
 
     public String uniqueId() {
         return _uniqueId == null ? (_uniqueId = generateUuid(writeToStream(this, new ByteArrayOutputStream())
@@ -99,5 +102,11 @@ public final class IndexKey implements Comparable<IndexKey> {
 
     public static String approvalType(String type) { return type + "$approval"; }
 
-    public static String baseType(String type) { return type.substring(0, type.indexOf("$approval")); }
+    public static String baseType(String type) { return type.substring(0, safeIndex(type.indexOf("$approval"))); }
+
+    public static boolean isDotIndex(String index) { return index.indexOf(".") > 0; }
+
+    public static String baseIndex(String index) { return index.substring(0, safeIndex(index.indexOf("."))); }
+
+    public static String typeUrn(String index, String type) { return index + ":" + type; }
 }

@@ -1,21 +1,25 @@
 package io.polyglotted.pgmodel.ac;
 
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.ImmutableSet;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.Accessors;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Predicates.not;
+import static com.google.common.base.Strings.isNullOrEmpty;
 import static com.google.common.collect.Maps.filterKeys;
 import static io.polyglotted.pgmodel.ac.SubjectAttribute.ACCESS_TOKEN;
 import static io.polyglotted.pgmodel.ac.SubjectAttribute.CREDENTIAL;
+import static io.polyglotted.pgmodel.ac.SubjectAttribute.DISPLAY_NAME;
+import static io.polyglotted.pgmodel.ac.SubjectAttribute.GROUPS;
+import static io.polyglotted.pgmodel.ac.SubjectAttribute.ROLES;
 import static io.polyglotted.pgmodel.util.MapRetriever.deepRetrieve;
 import static io.polyglotted.pgmodel.util.ModelUtil.jsonEquals;
 
@@ -32,6 +36,19 @@ public final class Subject {
     public String credential() { return attribute(CREDENTIAL); }
 
     public String token() { return attribute(ACCESS_TOKEN); }
+
+    public String user() {
+        String displayName = attribute(DISPLAY_NAME);
+        return isNullOrEmpty(displayName) ? principal : displayName;
+    }
+
+    public List<String> groups() {
+        return attributes.containsKey(GROUPS.name()) ? attribute(GROUPS) : ImmutableList.of();
+    }
+
+    public Set<String> roles() {
+        return attributes.containsKey(ROLES.name()) ? attribute(ROLES) : ImmutableSet.of();
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -60,6 +77,11 @@ public final class Subject {
 
         public Builder attribute(String key, Object value) {
             this.attributes.put(key, value);
+            return this;
+        }
+
+        public Builder attributes(Map<String, Object> map) {
+            this.attributes.putAll(map);
             return this;
         }
 
