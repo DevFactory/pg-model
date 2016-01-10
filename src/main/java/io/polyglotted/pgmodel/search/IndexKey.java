@@ -34,7 +34,6 @@ public final class IndexKey implements Comparable<IndexKey> {
     public final Boolean delete;
     public final Boolean store;
     private transient String _uniqueId;
-    private transient String _typeUrn;
 
     public static IndexKey keyWith(String index, String type, String id) {
         return keyWithParent(index, type, id, null);
@@ -56,13 +55,17 @@ public final class IndexKey implements Comparable<IndexKey> {
         return new IndexKey(checkNotEmpty(index), checkNotEmpty(type), id, parent, version, null, null);
     }
 
-    public String approvalType() { return isApprovalType(type) ? type : approvalType(type); }
-
     public String baseIndex() { return isDotIndex(index) ? baseIndex(index) : index; }
+
+    public String liveAlias() { return liveAlias(baseIndex()); }
+
+    public String allAlias() { return allAlias(baseIndex()); }
+
+    public String approvalType() { return isApprovalType(type) ? type : approvalType(type); }
 
     public String baseType() { return isApprovalType(type) ? baseType(type) : type; }
 
-    public String typeUrn() { return _typeUrn == null ? (_typeUrn = typeUrn(baseIndex(), baseType())) : _typeUrn; }
+    public String baseIndexId() { return baseIndex() + "/" + type + "/" + id; }
 
     public String uniqueId() {
         return _uniqueId == null ? (_uniqueId = generateUuid(writeToStream(this, new ByteArrayOutputStream())
@@ -107,6 +110,10 @@ public final class IndexKey implements Comparable<IndexKey> {
     public static boolean isDotIndex(String index) { return index.indexOf(".") > 0; }
 
     public static String baseIndex(String index) { return index.substring(0, safeIndex(index.indexOf("."))); }
+
+    public static String liveAlias(String index) { return index + ".live"; }
+
+    public static String allAlias(String index) { return index + ".all"; }
 
     public static String typeUrn(String index, String type) { return index + ":" + type; }
 }
