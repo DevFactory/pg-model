@@ -2,6 +2,7 @@ package io.polyglotted.pgmodel.search;
 
 import com.google.common.base.Function;
 import com.google.common.collect.ImmutableMap;
+import io.polyglotted.pgmodel.ObjectRef;
 import io.polyglotted.pgmodel.search.index.HiddenFields;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
@@ -17,7 +18,7 @@ import static io.polyglotted.pgmodel.util.ModelUtil.equalsAll;
 
 @RequiredArgsConstructor
 @ToString(includeFieldNames = false, doNotUseGetters = true)
-public final class Sleeve<T> {
+public final class Sleeve<T> implements ObjectRef<T> {
     @Delegate(excludes = KeyExclude.class)
     public final IndexKey key;
     public final T source;

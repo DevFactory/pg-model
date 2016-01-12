@@ -1,8 +1,11 @@
 package io.polyglotted.pgmodel.search;
 
 import com.google.common.collect.ImmutableMap;
+import io.polyglotted.pgmodel.ObjectRef;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
+import lombok.experimental.Accessors;
 import lombok.experimental.Delegate;
 
 import java.util.Map;
@@ -15,12 +18,13 @@ import static io.polyglotted.pgmodel.search.index.HiddenFields.BYTES_FIELD;
 import static io.polyglotted.pgmodel.search.index.HiddenFields.STATUS_FIELD;
 import static io.polyglotted.pgmodel.util.ModelUtil.jsonEquals;
 
+@Accessors(fluent = true)
 @RequiredArgsConstructor
 @ToString(includeFieldNames = false, doNotUseGetters = true)
-public final class SimpleDoc {
+public final class SimpleDoc implements ObjectRef<Map<String, Object>> {
     @Delegate(excludes = KeyExclude.class)
-    public final IndexKey key;
-    public final ImmutableMap<String, Object> source;
+    @Getter public final IndexKey key;
+    @Getter public final ImmutableMap<String, Object> source;
 
     @Override
     public boolean equals(Object o) { return jsonEquals(this, o); }
@@ -31,8 +35,6 @@ public final class SimpleDoc {
     public Map<String, Object> filteredCopy(boolean includeBase) {
         return filterKeys(source, includeBase ? SimpleDoc::baseVersionKey : SimpleDoc::validKey);
     }
-
-    public IndexKey key() { return key; }
 
     public DocStatus status() { return DocStatus.fromStatus(strVal(STATUS_FIELD)); }
 

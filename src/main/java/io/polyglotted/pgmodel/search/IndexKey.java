@@ -1,5 +1,6 @@
 package io.polyglotted.pgmodel.search;
 
+import io.polyglotted.pgmodel.KeyRef;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
@@ -20,7 +21,7 @@ import static io.polyglotted.pgmodel.util.ModelUtil.safeIndex;
 @Accessors(fluent = true)
 @RequiredArgsConstructor
 @ToString(includeFieldNames = false, of = {"index", "type", "id", "parent", "version"}, doNotUseGetters = true)
-public final class IndexKey implements Comparable<IndexKey> {
+public final class IndexKey implements KeyRef, Comparable<IndexKey> {
     @Getter
     public final String index;
     @Getter
