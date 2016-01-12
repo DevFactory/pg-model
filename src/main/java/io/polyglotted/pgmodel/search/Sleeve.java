@@ -2,6 +2,7 @@ package io.polyglotted.pgmodel.search;
 
 import com.google.common.base.Function;
 import com.google.common.collect.ImmutableMap;
+import io.polyglotted.pgmodel.KeyRef;
 import io.polyglotted.pgmodel.ObjectRef;
 import io.polyglotted.pgmodel.search.index.HiddenFields;
 import lombok.RequiredArgsConstructor;
@@ -24,6 +25,10 @@ public final class Sleeve<T> implements ObjectRef<T> {
     public final T source;
     public final String ancestor;
     public final ImmutableMap<String, Object> header;
+
+    public static <T> Sleeve<T> createWithRef(KeyRef key, T source) {
+        return create((IndexKey) key, source);
+    }
 
     public static <T> Sleeve<T> create(IndexKey key, T source) {
         return new Sleeve<>(checkNotNull(key), source, null, ImmutableMap.of());

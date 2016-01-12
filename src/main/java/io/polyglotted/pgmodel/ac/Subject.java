@@ -1,19 +1,21 @@
 package io.polyglotted.pgmodel.ac;
 
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.ImmutableSet;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.Accessors;
 
-import java.util.*;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Predicates.not;
 import static com.google.common.base.Strings.isNullOrEmpty;
+import static com.google.common.collect.ImmutableList.of;
 import static com.google.common.collect.Maps.filterKeys;
 import static io.polyglotted.pgmodel.ac.SubjectAttribute.ACCESS_TOKEN;
 import static io.polyglotted.pgmodel.ac.SubjectAttribute.CREDENTIAL;
@@ -37,17 +39,21 @@ public final class Subject {
 
     public String token() { return attribute(ACCESS_TOKEN); }
 
+    public boolean hasAttribute(SubjectAttribute attribute) { return hasAttribute(attribute.name()); }
+
+    public boolean hasAttribute(String property) { return attributes.containsKey(property); }
+
     public String user() {
         String displayName = attribute(DISPLAY_NAME);
         return isNullOrEmpty(displayName) ? principal : displayName;
     }
 
     public List<String> groups() {
-        return attributes.containsKey(GROUPS.name()) ? attribute(GROUPS) : ImmutableList.of();
+        return attributes.containsKey(GROUPS.name()) ? attribute(GROUPS) : of();
     }
 
-    public Set<String> roles() {
-        return attributes.containsKey(ROLES.name()) ? attribute(ROLES) : ImmutableSet.of();
+    public List<String> roles() {
+        return attributes.containsKey(ROLES.name()) ? attribute(ROLES) : of();
     }
 
     @Override
