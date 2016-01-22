@@ -22,6 +22,7 @@ import static io.polyglotted.pgmodel.ac.SubjectAttribute.CREDENTIAL;
 import static io.polyglotted.pgmodel.ac.SubjectAttribute.DISPLAY_NAME;
 import static io.polyglotted.pgmodel.ac.SubjectAttribute.GROUPS;
 import static io.polyglotted.pgmodel.ac.SubjectAttribute.ROLES;
+import static io.polyglotted.pgmodel.ac.SubjectAttribute.TRUSTED;
 import static io.polyglotted.pgmodel.util.MapRetriever.deepRetrieve;
 import static io.polyglotted.pgmodel.util.ModelUtil.jsonEquals;
 
@@ -47,6 +48,8 @@ public final class Subject {
         String displayName = attribute(DISPLAY_NAME);
         return isNullOrEmpty(displayName) ? principal : displayName;
     }
+
+    public boolean isTrusted() { return Boolean.TRUE.equals(attribute(TRUSTED)); }
 
     public List<String> groups() {
         return attributes.containsKey(GROUPS.name()) ? attribute(GROUPS) : of();

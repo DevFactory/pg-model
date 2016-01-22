@@ -75,6 +75,10 @@ public final class IndexKey implements KeyRef, Comparable<IndexKey> {
 
     public IndexKey delete() { return new IndexKey(index, type, id, parent, version, true, store); }
 
+    public IndexKey newIndex(String index) { return new IndexKey(index, type, id, parent, version, delete, store); }
+
+    public IndexKey newType(String type) { return new IndexKey(index, type, id, parent, version, delete, store); }
+
     public IndexKey newVersion(long version) { return new IndexKey(index, type, id, parent, version, delete, store); }
 
     public IndexKey approvalKey() { return new IndexKey(index, approvalType(), id, parent, null, delete, store); }
@@ -117,4 +121,8 @@ public final class IndexKey implements KeyRef, Comparable<IndexKey> {
     public static String allAlias(String index) { return index + ".all"; }
 
     public static String typeUrn(String index, String type) { return index + ":" + type; }
+
+    public static String indexOf(String typeUrn) { return typeUrn.substring(0, safeIndex(typeUrn.indexOf(":"))); }
+
+    public static String typeOf(String typeUrn) { return typeUrn.substring(typeUrn.indexOf(":") + 1); }
 }

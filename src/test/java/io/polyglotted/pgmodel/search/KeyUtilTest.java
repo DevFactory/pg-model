@@ -32,6 +32,23 @@ public class KeyUtilTest extends KeyUtil {
     }
 
     @DataProvider
+    public static Object[][] typeUrnInputs() {
+        return new Object[][]{
+           {"foo:bar", "foo", "bar"},
+           {"foo:*", "foo", "*"},
+           {"*", "", "*"},
+           {":*", "", "*"},
+           {"", "", ""},
+        };
+    }
+
+    @Test(dataProvider = "typeUrnInputs")
+    public void typeOfIndexOf(String typeUrn, String index, String type) {
+        assertThat(IndexKey.indexOf(typeUrn), is(index));
+        assertThat(IndexKey.typeOf(typeUrn), is(type));
+    }
+
+    @DataProvider
     public static Object[][] indexKeyInputs() {
         return new Object[][]{
            {keyWith("foo_index", "Bar", "baz:001"), "foo_index/Bar/baz:001"},

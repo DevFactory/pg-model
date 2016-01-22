@@ -58,7 +58,7 @@ public final class Sleeve<T> implements ObjectRef<T> {
 
     public DocStatus status() { return (DocStatus) header.get(HiddenFields.STATUS_FIELD); }
 
-    public Sleeve<T> delete() { return new Sleeve<>(key.delete(), null, key.uniqueId(), ImmutableMap.of()); }
+    public Sleeve<T> delete() { return new Sleeve<>(key.delete(), source, key.uniqueId(), ImmutableMap.of()); }
 
     public Sleeve<T> update(T update) { return new Sleeve<>(key, update, key.uniqueId(), ImmutableMap.of()); }
 
